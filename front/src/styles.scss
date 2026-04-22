@@ -1,6 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use './scss/button.scss';
+
 body {
   margin: 0;
   font-family: sans-serif;
+}
+
+main {
+  padding: 0.5em;
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 0.5em;
+
+  h1 {
+    text-align: center;
+  }
 }

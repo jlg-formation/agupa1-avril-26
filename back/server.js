@@ -2,6 +2,8 @@ import express from "express";
 
 console.log("Starting ' server...");
 
+const a = 12;
+
 const app = express();
 
 app.get("/", (req, res) => {

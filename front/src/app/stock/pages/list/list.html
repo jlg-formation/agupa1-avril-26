@@ -2,9 +2,15 @@
   <h1>Liste des articles</h1>
   <div class="content">
     <nav>
-      <button>Rafraichir</button>
-      <a routerLink="add">Ajouter</a>
-      <button>Supprimer</button>
+      <button title="Rafraichir">
+        <fa-icon [icon]="faRotateRight" />
+      </button>
+      <a title="Ajouter" routerLink="add" class="button">
+        <fa-icon [icon]="faPlus" />
+      </a>
+      <button title="Supprimer">
+        <fa-icon [icon]="faTrashCan" />
+      </button>
     </nav>
     <table>
       <thead>

@@ -5,7 +5,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, FaIconComponent],
+  imports: [FaIconComponent, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

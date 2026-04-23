@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Article as ArticleType } from '../../types/article';
 import { HttpClient } from '@angular/common/http';
-import { delay, map, Observable, of, switchMap } from 'rxjs';
+import { catchError, delay, map, Observable, of, switchMap } from 'rxjs';
 
 const articles: ArticleType[] = [
   { id: 'a1', name: 'Tournevis', price: 10.99, qty: 456 },
@@ -19,15 +19,9 @@ export class Article {
 
   http = inject(HttpClient);
 
-  constructor() {
-    if (this.articles() === undefined) {
-      this.refresh().subscribe();
-    }
-  }
-
   refresh(): Observable<void> {
     return of(undefined).pipe(
-      delay(2000),
+      delay(300),
       switchMap(() => {
         return this.http.get<ArticleType[]>(url);
       }),

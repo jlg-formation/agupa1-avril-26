@@ -3,12 +3,6 @@ import { Article as ArticleType } from '../../types/article';
 import { HttpClient } from '@angular/common/http';
 import { catchError, delay, map, Observable, of, switchMap } from 'rxjs';
 
-const articles: ArticleType[] = [
-  { id: 'a1', name: 'Tournevis', price: 10.99, qty: 456 },
-  { id: 'a2', name: 'Pelle', price: 4.99, qty: 12 },
-  { id: 'a3', name: 'Marteau', price: 8.99, qty: 23 },
-];
-
 const url = 'http://localhost:3000/api/articles';
 
 @Injectable({

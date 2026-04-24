@@ -1,10 +1,11 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, input, Input, signal } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCircleNotch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
+import { catchError, delay, finalize, Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-async-btn',
-  imports: [],
+  imports: [FaIconComponent],
   templateUrl: './async-btn.html',
   styleUrl: './async-btn.scss',
 })
@@ -14,4 +15,28 @@ export class AsyncBtn {
   disabled = input(false);
   action = input.required<Observable<void>>();
   classes = input('');
+
+  isRunning = signal(false);
+
+  run() {
+    console.log('run');
+    of(undefined)
+      .pipe(
+        tap(() => {
+          this.isRunning.set(true);
+        }),
+        delay(300),
+        switchMap(() => {
+          return this.action();
+        }),
+        catchError((err) => {
+          console.log('err: ', err);
+          return of(undefined);
+        }),
+        finalize(() => {
+          this.isRunning.set(false);
+        }),
+      )
+      .subscribe();
+  }
 }

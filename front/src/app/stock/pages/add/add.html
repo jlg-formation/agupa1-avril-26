@@ -13,10 +13,6 @@
       <span>Quantité</span>
       <input type="number" formControlName="qty" />
     </label>
-    <button class="primary" [disabled]="f.invalid" (click)="doSubmit().subscribe()">
-      <fa-icon [icon]="faPlus" />
-      <span>Ajouter</span>
-    </button>
     <app-async-btn [icon]="faPlus" [disabled]="f.invalid" [action]="doSubmit()" classes="primary">
       Ajouter
     </app-async-btn>

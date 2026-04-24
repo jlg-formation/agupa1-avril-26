@@ -1,1 +1,7 @@
-<p>async-btn works!</p>
+<button [class]="classes()" [disabled]="disabled() || isRunning()" (click)="run()">
+  <fa-icon
+    [icon]="isRunning() ? faCircleNotch : icon()"
+    [animation]="isRunning() ? 'spin' : undefined"
+  />
+  <ng-content />
+</button>

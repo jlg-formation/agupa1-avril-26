@@ -6,10 +6,11 @@ import { map, Observable, of, switchMap } from 'rxjs';
 import { NewArticle } from '../../../types/article';
 import { AsyncBtn } from '../../../widgets/async-btn/async-btn';
 import { Article } from '../../services/article';
+import { Autofocus } from '../../../widgets/autofocus';
 
 @Component({
   selector: 'app-add',
-  imports: [ReactiveFormsModule, AsyncBtn],
+  imports: [ReactiveFormsModule, AsyncBtn, Autofocus],
   templateUrl: './add.html',
   styleUrl: './add.scss',
 })

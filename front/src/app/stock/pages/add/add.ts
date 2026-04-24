@@ -43,7 +43,9 @@ export class Add {
       switchMap(() => {
         return this.router.navigate(['..'], { relativeTo: this.route });
       }),
-      map(() => {}),
+      map(() => {
+        return;
+      }),
     );
   }
 }

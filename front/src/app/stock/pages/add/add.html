@@ -21,7 +21,7 @@
       [disabled]="f.invalid"
       [action]="doSubmit()"
       classes="primary"
-      (error)="errorMsg.set($event)"
+      (errorMsg)="errorMsg.set($event)"
     >
       Ajouter
     </app-async-btn>

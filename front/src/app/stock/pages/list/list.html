@@ -37,8 +37,10 @@
         } @else {
           @for (a of articleService.articles(); track a.id) {
             <tr (click)="select(a.id)" [class.selected]="selectedArticleIds.has(a.id)">
-              <td class="name">{{ a.name }}</td>
-              <td class="price">{{ a.price }}€</td>
+              <td class="name">{{ a.name | ellipsis: 5 }}</td>
+              <td class="price">
+                {{ a.price | currency }}
+              </td>
               <td class="qty">{{ a.qty }}</td>
             </tr>
           } @empty {

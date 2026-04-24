@@ -11,10 +11,12 @@ import { Article as ArticleService } from '../../services/article';
 import { catchError, delay, Observable, of, switchMap, tap } from 'rxjs';
 import { Article } from '../../../types/article';
 import { AsyncBtn } from '../../../widgets/async-btn/async-btn';
+import { CommonModule } from '@angular/common';
+import { EllipsisPipe } from '../../../widgets/ellipsis-pipe';
 
 @Component({
   selector: 'app-list',
-  imports: [RouterLink, FaIconComponent, AsyncBtn],
+  imports: [RouterLink, FaIconComponent, AsyncBtn, CommonModule, EllipsisPipe],
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })

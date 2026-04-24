@@ -1,16 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { map, Observable, of, switchMap } from 'rxjs';
-import { Article } from '../../services/article';
 import { NewArticle } from '../../../types/article';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncBtn } from '../../../widgets/async-btn/async-btn';
+import { Article } from '../../services/article';
 
 @Component({
   selector: 'app-add',
-  imports: [FaIconComponent, ReactiveFormsModule, AsyncBtn],
+  imports: [ReactiveFormsModule, AsyncBtn],
   templateUrl: './add.html',
   styleUrl: './add.scss',
 })

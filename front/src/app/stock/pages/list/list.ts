@@ -8,12 +8,13 @@ import {
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
 import { Article as ArticleService } from '../../services/article';
-import { catchError, delay, of, switchMap, tap } from 'rxjs';
+import { catchError, delay, Observable, of, switchMap, tap } from 'rxjs';
 import { Article } from '../../../types/article';
+import { AsyncBtn } from '../../../widgets/async-btn/async-btn';
 
 @Component({
   selector: 'app-list',
-  imports: [RouterLink, FaIconComponent],
+  imports: [RouterLink, FaIconComponent, AsyncBtn],
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })
@@ -52,16 +53,21 @@ export class List {
     this.selectedArticleIds.add(id);
   }
 
-  remove() {
-    of(undefined)
-      .pipe(
-        delay(2000),
-        switchMap(() => this.articleService.remove(this.selectedArticleIds)),
-        tap(() => {
-          this.selectedArticleIds.clear();
-        }),
-        switchMap(() => this.articleService.refresh()),
-      )
-      .subscribe();
+  remove(): Observable<void> {
+    return of(undefined).pipe(
+      delay(2000),
+      switchMap(() => this.articleService.remove(this.selectedArticleIds)),
+      tap(() => {
+        this.selectedArticleIds.clear();
+      }),
+      switchMap(() => this.articleService.refresh()),
+    );
+  }
+
+  refresh(): Observable<void> {
+    return of(undefined).pipe(
+      delay(300),
+      switchMap(() => this.articleService.refresh()),
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, input, Input, signal } from '@angular/core';
+import { Component, computed, input, Input, signal } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCircleNotch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { catchError, delay, finalize, Observable, of, switchMap, tap } from 'rxjs';
@@ -15,8 +15,12 @@ export class AsyncBtn {
   disabled = input(false);
   action = input.required<Observable<void>>();
   classes = input('');
+  title = input('');
 
   isRunning = signal(false);
+  isDisabled = computed(() => {
+    return this.disabled() || this.isRunning();
+  });
 
   run() {
     console.log('run');

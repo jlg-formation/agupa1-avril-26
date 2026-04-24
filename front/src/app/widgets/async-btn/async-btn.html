@@ -1,4 +1,4 @@
-<button [class]="classes()" [disabled]="disabled() || isRunning()" (click)="run()">
+<button [class]="classes()" [disabled]="isDisabled()" (click)="run()" [title]="title()">
   <fa-icon
     [icon]="isRunning() ? faCircleNotch : icon()"
     [animation]="isRunning() ? 'spin' : undefined"

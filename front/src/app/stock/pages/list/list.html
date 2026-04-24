@@ -2,15 +2,16 @@
   <h1>Liste des articles</h1>
   <div class="content">
     <nav>
-      <button title="Rafraichir">
-        <fa-icon [icon]="faRotateRight" />
-      </button>
+      <app-async-btn [icon]="faRotateRight" [action]="refresh()" title="Rafraichir" />
       <a title="Ajouter" routerLink="add" class="button">
         <fa-icon [icon]="faPlus" />
       </a>
-      <button title="Supprimer" [hidden]="selectedArticleIds.size === 0" (click)="remove()">
-        <fa-icon [icon]="faTrashCan" />
-      </button>
+      <app-async-btn
+        [icon]="faTrashCan"
+        [action]="remove()"
+        title="Supprimer"
+        [hidden]="selectedArticleIds.size === 0"
+      />
     </nav>
     <div class="error">
       {{ errorMsg() }}

@@ -8,6 +8,12 @@ nav {
   gap: 0.3em;
 }
 
+div.loading {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+}
+
 div.error {
   height: 2em;
   display: flex;

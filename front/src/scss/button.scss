@@ -13,6 +13,10 @@ a.button {
   text-decoration: inherit;
   color: inherit;
 
+  &[hidden] {
+    display: none;
+  }
+
   &:disabled {
     color: #aaa;
   }

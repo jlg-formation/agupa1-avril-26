@@ -1,7 +1,7 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { Article as ArticleType } from '../../types/article';
 import { HttpClient } from '@angular/common/http';
-import { catchError, delay, map, Observable, of, switchMap } from 'rxjs';
+import { inject, Injectable, signal } from '@angular/core';
+import { delay, map, Observable, of, switchMap } from 'rxjs';
+import { Article as ArticleType, NewArticle } from '../../types/article';
 
 const url = 'http://localhost:3000/api/articles';
 
@@ -23,5 +23,18 @@ export class Article {
         this.articles.set(articles);
       }),
     );
+  }
+
+  add(newArticle: NewArticle): Observable<void> {
+    return this.http.post<void>(url, newArticle);
+  }
+
+  remove(selectedArticleIds: Set<string>): Observable<void> {
+    return this.http.delete<void>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([...selectedArticleIds]),
+    });
   }
 }

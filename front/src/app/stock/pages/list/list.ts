@@ -1,9 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faPlus, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleNotch,
+  faPlus,
+  faRotateRight,
+  faTrashCan,
+} from '@fortawesome/free-solid-svg-icons';
 import { Article as ArticleService } from '../../services/article';
-import { catchError, of } from 'rxjs';
+import { catchError, delay, of, switchMap, tap } from 'rxjs';
+import { Article } from '../../../types/article';
 
 @Component({
   selector: 'app-list',
@@ -15,15 +21,19 @@ export class List {
   faRotateRight = faRotateRight;
   faPlus = faPlus;
   faTrashCan = faTrashCan;
+  faCircleNotch = faCircleNotch;
 
   articleService = inject(ArticleService);
   errorMsg = signal('');
 
+  selectedArticleIds = new Set<Article['id']>();
+
   constructor() {
     if (this.articleService.articles() === undefined) {
-      this.articleService
-        .refresh()
+      of(undefined)
         .pipe(
+          delay(2000),
+          switchMap(() => this.articleService.refresh()),
           catchError((err) => {
             console.log('err: ', err);
             this.errorMsg.set('Erreur Technique');
@@ -32,5 +42,26 @@ export class List {
         )
         .subscribe();
     }
+  }
+
+  select(id: Article['id']) {
+    if (this.selectedArticleIds.has(id)) {
+      this.selectedArticleIds.delete(id);
+      return;
+    }
+    this.selectedArticleIds.add(id);
+  }
+
+  remove() {
+    of(undefined)
+      .pipe(
+        delay(2000),
+        switchMap(() => this.articleService.remove(this.selectedArticleIds)),
+        tap(() => {
+          this.selectedArticleIds.clear();
+        }),
+        switchMap(() => this.articleService.refresh()),
+      )
+      .subscribe();
   }
 }

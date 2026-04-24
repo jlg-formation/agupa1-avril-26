@@ -13,7 +13,16 @@
       <span>Quantité</span>
       <input type="number" formControlName="qty" />
     </label>
-    <app-async-btn [icon]="faPlus" [disabled]="f.invalid" [action]="doSubmit()" classes="primary">
+    <div class="error">
+      {{ errorMsg() }}
+    </div>
+    <app-async-btn
+      [icon]="faPlus"
+      [disabled]="f.invalid"
+      [action]="doSubmit()"
+      classes="primary"
+      (error)="errorMsg.set($event)"
+    >
       Ajouter
     </app-async-btn>
   </form>

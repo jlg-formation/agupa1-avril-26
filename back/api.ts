@@ -16,6 +16,10 @@ api.get("/articles", (req, res) => {
 
 api.post("/articles", json(), (req, res) => {
     const newArticle: NewArticle = req.body;
+    if (newArticle.name === "Crotte") {
+        res.status(400).end();
+        return;
+    }
     articles.push({ id: randomUUID(), ...newArticle });
     res.status(201).end();
 });

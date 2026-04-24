@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -26,6 +26,8 @@ export class Add {
     price: [0, Validators.required],
     qty: [1, Validators.required],
   });
+
+  errorMsg = signal('');
 
   articleService = inject(Article);
 
